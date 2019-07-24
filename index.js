@@ -59,3 +59,14 @@ server.put('/api/users/:id', (req, res) => {
         })
 })
 
+server.delete('/api/users/:id', (req, res) => {
+    const { id } = req.params;
+    Users.remove(id)
+        .then(response => {
+            res.status(204).json({Success: `${id} removed from database`})
+        })
+        .catch(err => {
+            res.status(500).json({Err: err.message});
+        })
+})
+
