@@ -34,3 +34,17 @@ server.get('/api/users/:id', (req, res) => {
     
 })
 
+server.post('/api/users', (req, res) => {
+    const userInfo = req.body;
+    console.log(userInfo);
+    if(userInfo.bio && userInfo.name) {
+        Users.insert(userInfo)
+        .then(user => {
+            res.status(201).json({...user,name: userInfo.name, bio: userInfo.bio});
+        })
+        .catch(err => {
+            res.status(500).json({Err: err.message});
+        })
+    }
+})
+
