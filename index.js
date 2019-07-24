@@ -48,3 +48,14 @@ server.post('/api/users', (req, res) => {
     }
 })
 
+server.put('/api/users/:id', (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const userInfo = req.body;
+    console.log(userInfo);
+    Users.update(id, userInfo)
+        .then(response => {
+            res.status(200).json(response);
+        })
+})
+
