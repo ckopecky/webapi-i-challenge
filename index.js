@@ -18,3 +18,19 @@ server.get('/api/users', (req, res) => {
         })
 })
 
+server.get('/api/users/:id', (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+        Users.findById(id)
+        .then(response => {
+            if(!response) {
+                res.status(401).json({Error: "No user found with that ID"})
+            } 
+            res.status(200).json(response);
+        })
+        .catch(err => {
+            res.status(500).json({Err: err.message});
+        })
+    
+})
+
